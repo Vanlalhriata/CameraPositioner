@@ -1,0 +1,5 @@
+This setup is for a certain camera.
+
+Camera calibration data is stored in AugmentedReality\CameraPositioner\AugmentedReality\Content\Data
+
+Use ARToolkit camera calibrator to calibrate for new cameras first
