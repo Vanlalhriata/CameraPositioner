@@ -73,6 +73,7 @@ namespace CameraPositioner
         {
             screenManager.AddScreen(new BackgroundScreen(), null);
             screenManager.AddScreen(new WebcamFeedScreen(), null);
+            screenManager.AddScreen(new InfoScreen(), null);
             screenManager.AddScreen(new ModelScreen("Models/Axes"), null);
         }
 
@@ -86,25 +87,5 @@ namespace CameraPositioner
         }
 
         #endregion Dispose
-
-        #region Loop
-
-        protected override void Update(GameTime gameTime)
-        {
-            // TODO: Add your update logic here
-
-            base.Update(gameTime);
-        }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
-            base.Draw(gameTime);
-        }
-
-        #endregion Loop
     }
 }

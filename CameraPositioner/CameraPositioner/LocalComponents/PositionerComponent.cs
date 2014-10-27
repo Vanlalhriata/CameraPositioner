@@ -1,13 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 
 namespace CameraPositioner.LocalComponents
@@ -17,7 +8,7 @@ namespace CameraPositioner.LocalComponents
     /// the location of the camera. This is assuming the center of the detected marker is the origin.
     /// The results are manipulated to avoid wild fluctations and thus may have a slight delay.
     /// </summary>
-    public class PositionerComponent : GameComponent
+    public class PositionerComponent : GameComponent, IPositionerService
     {
 
         #region Fields
@@ -29,7 +20,7 @@ namespace CameraPositioner.LocalComponents
 
         #region Properties
 
-        public Vector3? Position;
+        public Vector3? Position { get; private set; }
 
         #endregion Properties
 
@@ -38,13 +29,13 @@ namespace CameraPositioner.LocalComponents
         public PositionerComponent(Game game)
             : base(game)
         {
-            // TODO: Add to service
+            game.Services.AddService(typeof(IPositionerService), this);
         }
 
         public override void Initialize()
         {
             arResult = (IArResultService)Game.Services.GetService(typeof(IArResultService));
-            lerpAmount = 0.1f;
+            lerpAmount = 0.01f;
 
             base.Initialize();
         }
@@ -81,7 +72,7 @@ namespace CameraPositioner.LocalComponents
             result = Vector3.Transform(Vector3.Zero, Matrix.Invert(m));
 
             // However, for practical use, the marker will lie along the floor (xz plane) with its normal pointing up (y),
-            // and the bottom towards +ve z. This means z is actually y and y is actually -z; or rotateX(90 degrees)
+            // and the bottom towards +ve z. This means z is actually y and y is actually -z; or rotateX(90 degrees).
             // Note that the default config does this rotateX(90 degrees) while drawing the axes model
 
             result = new Vector3(result.X, result.Z, -result.Y);

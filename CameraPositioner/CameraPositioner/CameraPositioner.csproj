@@ -79,11 +79,13 @@
     <Compile Include="LocalComponents\ArResultComponent.cs" />
     <Compile Include="LocalComponents\IArResultService.cs" />
     <Compile Include="LocalComponents\ConfigurationManager.cs" />
+    <Compile Include="LocalComponents\IPositionerService.cs" />
     <Compile Include="LocalComponents\PositionerComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="Screens\BackgroundScreen.cs" />
+    <Compile Include="Screens\InfoScreen.cs" />
     <Compile Include="Screens\ModelScreen.cs" />
     <Compile Include="Screens\WebcamFeedScreen.cs" />
     <Compile Include="Utils.cs" />
