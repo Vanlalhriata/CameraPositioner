@@ -114,8 +114,15 @@ namespace AugmentedReality
 
             try
             {
+                byte[] buffer = null;
+                
+                if (config.GetBool("CameraSetup", "Mirror"))
+                    buffer = videoCapture.BufferGray;   // the gray buffer is mirrored by default
+                else
+                    buffer = Utils.FlipHorizontalGrayscale(videoCapture.BufferGray, videoCapture.GrayWidth, videoCapture.GrayHeight);
+
                 //Detect the markers
-                var results = arDetector.DetectAllMarkers(videoCapture.BufferGray, videoCapture.GrayWidth, videoCapture.GrayHeight);
+                var results = arDetector.DetectAllMarkers(buffer, videoCapture.GrayWidth, videoCapture.GrayHeight);
                 DetectionResults = results;
             }
             finally
