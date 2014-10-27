@@ -80,13 +80,11 @@ namespace CameraPositioner.LocalComponents
             Vector3 result = Vector3.Zero;
             result = Vector3.Transform(Vector3.Zero, Matrix.Invert(m));
 
-            // However, for practical use, the marker will lie along the floor (xz plane) with its normal pointing up,
-            // and the bottom towards +ve z. This means z is actually y and y is actually -z
+            // However, for practical use, the marker will lie along the floor (xz plane) with its normal pointing up (y),
+            // and the bottom towards +ve z. This means z is actually y and y is actually -z; or rotateX(90 degrees)
+            // Note that the default config does this rotateX(90 degrees) while drawing the axes model
 
-            // TODO: The video feed is mirrored from previous implementations.
-            // Unmirroring it will reverse x here and the marker pattern files
-
-            result = new Vector3(-result.X, result.Z, -result.Y);
+            result = new Vector3(result.X, result.Z, -result.Y);
 
             return result;
         }
