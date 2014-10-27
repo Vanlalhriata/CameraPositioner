@@ -52,6 +52,7 @@ namespace CameraPositioner
             Components.Add(new VideoCaptureComponent(this));
             Components.Add(new AugmentedRealityComponent(this));
             Components.Add(new ArResultComponent(this));
+            Components.Add(new PositionerComponent(this));
 
             Services.AddService(typeof(IConfigurationService), config);
         }
