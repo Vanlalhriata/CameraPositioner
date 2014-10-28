@@ -49,10 +49,8 @@ namespace CameraPositioner.LocalComponents
 
             if (null == arResult.Transform)
                 Position = null;
-            else if (null == Position)
-                Position = GetPosition((Matrix)arResult.Transform);
             else
-                Position = Vector3.Lerp((Vector3)Position, GetPosition((Matrix)arResult.Transform), lerpAmount);
+                Position = LerpPosition(Position, (Matrix)arResult.Transform);
 
             base.Update(gameTime);
         }
@@ -60,6 +58,19 @@ namespace CameraPositioner.LocalComponents
         #endregion Loop
 
         #region Helper methods
+
+        private Vector3? LerpPosition(Vector3? oldPosition, Matrix transform)
+        {
+            Vector3 newPosition = GetPosition(transform);
+
+            // Return null for invalid newPosition
+            if (float.IsNaN(newPosition.X) || float.IsNaN(newPosition.Y) || float.IsNaN(newPosition.Z))
+                return null;
+            else if (null == oldPosition)
+                return newPosition;
+            else
+                return Vector3.Lerp((Vector3)oldPosition, newPosition, lerpAmount);
+        }
 
         private static Vector3 GetPosition(Matrix m)
         {
